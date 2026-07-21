@@ -1,0 +1,104 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x563724eb97b0 .scope module, "fulladder_using_halfadder_tb" "fulladder_using_halfadder_tb" 2 1;
+ .timescale 0 0;
+v0x563724ecfa80_0 .var "A", 0 0;
+v0x563724ecfb40_0 .var "B", 0 0;
+v0x563724ecfc10_0 .var "C", 0 0;
+v0x563724ecfd10_0 .net "carry", 0 0, L_0x563724ed0280;  1 drivers
+v0x563724ecfde0_0 .net "sum", 0 0, L_0x563724ed0010;  1 drivers
+S_0x563724eb9940 .scope module, "uut" "fulladder_using_halfadder" 2 4, 3 1 0, S_0x563724eb97b0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "A";
+    .port_info 1 /INPUT 1 "B";
+    .port_info 2 /INPUT 1 "C";
+    .port_info 3 /OUTPUT 1 "sum";
+    .port_info 4 /OUTPUT 1 "carry";
+L_0x563724ecfed0 .functor XOR 1, v0x563724ecfa80_0, v0x563724ecfb40_0, C4<0>, C4<0>;
+L_0x563724ed0010 .functor XOR 1, L_0x563724ecfed0, v0x563724ecfc10_0, C4<0>, C4<0>;
+L_0x563724ed0170 .functor AND 1, v0x563724ecfa80_0, v0x563724ecfb40_0, C4<1>, C4<1>;
+L_0x563724ed01e0 .functor AND 1, v0x563724ecfc10_0, L_0x563724ecfed0, C4<1>, C4<1>;
+L_0x563724ed0280 .functor OR 1, L_0x563724ed01e0, L_0x563724ed0170, C4<0>, C4<0>;
+v0x563724eb9ad0_0 .net "A", 0 0, v0x563724ecfa80_0;  1 drivers
+v0x563724ecf440_0 .net "B", 0 0, v0x563724ecfb40_0;  1 drivers
+v0x563724ecf500_0 .net "C", 0 0, v0x563724ecfc10_0;  1 drivers
+v0x563724ecf5d0_0 .net "S1", 0 0, L_0x563724ecfed0;  1 drivers
+v0x563724ecf690_0 .net "S2", 0 0, L_0x563724ed0170;  1 drivers
+v0x563724ecf7a0_0 .net "S3", 0 0, L_0x563724ed01e0;  1 drivers
+v0x563724ecf860_0 .net "carry", 0 0, L_0x563724ed0280;  alias, 1 drivers
+v0x563724ecf920_0 .net "sum", 0 0, L_0x563724ed0010;  alias, 1 drivers
+    .scope S_0x563724eb97b0;
+T_0 ;
+    %vpi_call 2 6 "$monitor", "A=%b,B=%b,C=%b,sum=%b,carry=%b", v0x563724ecfa80_0, v0x563724ecfb40_0, v0x563724ecfc10_0, v0x563724ecfde0_0, v0x563724ecfd10_0 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfa80_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfb40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563724ecfc10_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call 2 15 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "fulladder_using_halfadder_tb.v";
+    "fulladder_using_halfadder.v";
