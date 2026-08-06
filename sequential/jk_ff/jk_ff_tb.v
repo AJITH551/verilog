@@ -1,87 +1,69 @@
-/*module jk_ff_tb;
+`timescale 1ns/1ps
 
-reg j;
-reg k;
-reg clk;
-wire q;
+module jk_flipflop_tb;
 
-// Instantiate the JK Flip-Flop
-jk_ff uut (
-    .j(j),
-    .k(k),
-    .clk(clk),
-    .q(q);
-);
+    reg clk;
+    reg reset;
+    reg J;
+    reg K;
+    wire Q;
 
-// Clock Generation
-always #5 clk = ~clk;
+    // Instantiate the JK Flip-Flop
+    jk_flipflop uut (
+        .clk(clk),
+        .reset(reset),
+        .J(J),
+        .K(K),
+        .Q(Q)
+    );
 
-initial
-begin
+    // Clock generation (10 ns period)
+    always #5 clk = ~clk;
 
-$monitor("Time=%0t clk=%b J=%b K=%b Q=%b",
-              $time, clk, j, k, q);
-    // Initialize
-    clk = 0;
-    j = 0;
-    k = 0;
+    // Test sequence
+    initial begin
+        // Initialize signals
+        clk = 0;
+        reset = 1;
+        J = 0;
+        K = 0;
 
-    // Apply test vectors
+        // Apply reset
+        #10;
+        reset = 0;
 
-    #10 j = 0; k = 0;   // No Change
+        // 00 -> No Change
+        J = 0; K = 0;
+        #10;
 
-    #10 j = 0; k = 1;   // Reset
+        // 10 -> Set
+        J = 1; K = 0;
+        #10;
 
-    #10 j = 1; k = 0;   // Set
+        // 00 -> No Change
+        J = 0; K = 0;
+        #10;
 
-    #10 j = 1; k = 1;   // Toggle
+        // 01 -> Reset
+        J = 0; K = 1;
+        #10;
 
-    #10 j = 1; k = 1;   // Toggle Again
+        // 11 -> Toggle
+        J = 1; K = 1;
+        #10;
 
-    #10 j = 0; k = 0;   // Hold
+        // 11 -> Toggle again
+        J = 1; K = 1;
+        #10;
 
-    #20 $finish;
-end
+        // Finish simulation
+        $finish;
+    end
 
-endmodule*/
-
-module jk_ff_tb;
-
-reg j;
-reg k;
-reg clk;
-wire q;
-
-// Instantiate the JK Flip-Flop
-jk_ff uut (
-    .j(j),
-    .k(k),
-    .clk(clk),
-    .q(q)
-);
-
-// Clock Generation
-always #5 clk = ~clk;
-
-initial
-begin
-    $monitor("Time=%0t clk=%b J=%b K=%b Q=%b",
-              $time, clk, j, k, q);
-
-    // Initialize
-    clk = 0;
-    j = 0;
-    k = 0;
-
-    // Apply test vectors
-    #10 j = 0; k = 0;   // Hold
-    #10 j = 0; k = 1;   // Reset
-    #10 j = 1; k = 0;   // Set
-    #10 j = 1; k = 1;   // Toggle
-    #10 j = 1; k = 1;   // Toggle Again
-    #10 j = 0; k = 0;   // Hold
-
-    #20 $finish;
-end
+    // Display values
+    initial begin
+        $monitor("Time=%0t Reset=%b J=%b K=%b Q=%b",
+                 $time, reset, J, K, Q);
+    end
 
 endmodule

@@ -1,19 +1,22 @@
-module jk_ff(input clk,j,k,output reg q);
+module jk_flipflop (
+    input clk,
+    input reset,
+    input J,
+    input K,
+    output reg Q
+);
 
-always@(posedge clk)
-
-begin
-
-case({j,k})
-
-2'b00:q<=q;
-2'b01:q<=1'b0;
-2'b10:q<=1'b1;
-2'b11:q<=~q;
-
-endcase
-
-end 
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        Q <= 1'b0;
+    else begin
+        case ({J, K})
+            2'b00: Q <= Q;      // No change
+            2'b01: Q <= 1'b0;   // Reset
+            2'b10: Q <= 1'b1;   // Set
+            2'b11: Q <= ~Q;     // Toggle
+        endcase
+    end
+end
 
 endmodule
-
